@@ -1,0 +1,157 @@
+@{
+    ViewData["Title"] = "Staff Dashboard";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-montserrat font-bold text-alda-dark mb-8">Staff Dashboard</h1>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="card">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-alda-gray text-sm mb-1">Total Scholarships</p>
+                    <p class="text-3xl font-bold text-alda-dark">@ViewBag.TotalScholarships</p>
+                    <p class="text-sm text-alda-gray mt-1">@ViewBag.ActiveScholarships active</p>
+                </div>
+                <div class="w-16 h-16 bg-alda-gold rounded-full flex items-center justify-center">
+                    <svg class="w-8 h-8 text-alda-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-alda-gray text-sm mb-1">Total Pages</p>
+                    <p class="text-3xl font-bold text-alda-dark">@ViewBag.TotalPages</p>
+                    <p class="text-sm text-alda-gray mt-1">@ViewBag.PublishedPages published</p>
+                </div>
+                <div class="w-16 h-16 bg-alda-gold rounded-full flex items-center justify-center">
+                    <svg class="w-8 h-8 text-alda-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-alda-gray text-sm mb-1">Contact Inquiries</p>
+                    <p class="text-3xl font-bold text-alda-dark">@ViewBag.TotalInquiries</p>
+                    <p class="text-sm text-red-600 mt-1">@ViewBag.UnreadInquiries unread</p>
+                </div>
+                <div class="w-16 h-16 bg-alda-gold rounded-full flex items-center justify-center">
+                    <svg class="w-8 h-8 text-alda-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <a asp-controller="Admin" asp-action="CreateScholarship" class="card hover:shadow-lg transition-shadow text-center">
+            <div class="w-12 h-12 bg-alda-gold rounded-lg flex items-center justify-center mx-auto mb-3">
+                <svg class="w-6 h-6 text-alda-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+            </div>
+            <h3 class="font-semibold text-alda-dark">New Scholarship</h3>
+        </a>
+
+        <a asp-controller="Admin" asp-action="Create" class="card hover:shadow-lg transition-shadow text-center">
+            <div class="w-12 h-12 bg-alda-gold rounded-lg flex items-center justify-center mx-auto mb-3">
+                <svg class="w-6 h-6 text-alda-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+            </div>
+            <h3 class="font-semibold text-alda-dark">New Page</h3>
+        </a>
+
+        <a asp-controller="Admin" asp-action="Inquiries" class="card hover:shadow-lg transition-shadow text-center">
+            <div class="w-12 h-12 bg-alda-gold rounded-lg flex items-center justify-center mx-auto mb-3">
+                <svg class="w-6 h-6 text-alda-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+            </div>
+            <h3 class="font-semibold text-alda-dark">View Inquiries</h3>
+        </a>
+
+        <a asp-controller="Admin" asp-action="Scholarships" class="card hover:shadow-lg transition-shadow text-center">
+            <div class="w-12 h-12 bg-alda-gold rounded-lg flex items-center justify-center mx-auto mb-3">
+                <svg class="w-6 h-6 text-alda-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </div>
+            <h3 class="font-semibold text-alda-dark">Manage Scholarships</h3>
+        </a>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Recent Inquiries -->
+        <div class="card">
+            <h2 class="text-xl font-montserrat font-bold text-alda-dark mb-4">Recent Inquiries</h2>
+            @if (ViewBag.RecentInquiries != null && ((List<PortalBase.Core.Entities.ContactInquiry>)ViewBag.RecentInquiries).Any())
+            {
+                <div class="space-y-3">
+                    @foreach (var inquiry in (List<PortalBase.Core.Entities.ContactInquiry>)ViewBag.RecentInquiries)
+                    {
+                        <div class="flex items-start justify-between p-3 bg-alda-light rounded-lg">
+                            <div class="flex-1">
+                                <p class="font-semibold text-alda-dark">@inquiry.FullName</p>
+                                <p class="text-sm text-alda-gray">@inquiry.Subject</p>
+                                <p class="text-xs text-alda-gray mt-1">@inquiry.CreatedAt.ToString("g")</p>
+                            </div>
+                            <div>
+                                @if (!inquiry.IsRead)
+                                {
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">New</span>
+                                }
+                                <a asp-controller="Admin" asp-action="InquiryDetails" asp-route-id="@inquiry.Id" class="text-alda-gold hover:text-alda-dark text-sm ml-2">View</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-alda-gray">No recent inquiries</p>
+            }
+        </div>
+
+        <!-- Recent Scholarships -->
+        <div class="card">
+            <h2 class="text-xl font-montserrat font-bold text-alda-dark mb-4">Recent Scholarships</h2>
+            @if (ViewBag.RecentScholarships != null && ((List<PortalBase.Core.Entities.Scholarship>)ViewBag.RecentScholarships).Any())
+            {
+                <div class="space-y-3">
+                    @foreach (var scholarship in (List<PortalBase.Core.Entities.Scholarship>)ViewBag.RecentScholarships)
+                    {
+                        <div class="flex items-start justify-between p-3 bg-alda-light rounded-lg">
+                            <div class="flex-1">
+                                <p class="font-semibold text-alda-dark">@scholarship.Title</p>
+                                <p class="text-sm text-alda-gray">@scholarship.Country • @scholarship.DegreeLevel</p>
+                                <p class="text-xs text-alda-gray mt-1">@scholarship.CreatedAt.ToString("g")</p>
+                            </div>
+                            <div>
+                                <a asp-controller="Admin" asp-action="EditScholarship" asp-route-id="@scholarship.Id" class="text-alda-gold hover:text-alda-dark text-sm">Edit</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-alda-gray">No recent scholarships</p>
+            }
+        </div>
+    </div>
+</div>
+
+

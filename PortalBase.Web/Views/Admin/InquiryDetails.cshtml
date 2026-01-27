@@ -1,0 +1,116 @@
+@model PortalBase.Core.Entities.ContactInquiry
+@{
+    ViewData["Title"] = "Inquiry Details";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <div class="mb-6">
+        <a asp-action="Inquiries" class="text-alda-gold hover:text-alda-dark transition-colors flex items-center gap-2 font-bold">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Back to Inquiries
+        </a>
+    </div>
+
+    <h1 class="text-3xl font-montserrat font-bold text-alda-dark mb-8 text-glow">Inquiry Management</h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+            <div class="card p-8">
+                <div class="flex justify-between items-start mb-8 border-b border-gray-100 pb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-alda-dark mb-2">@Model.Subject</h2>
+                        <div class="flex gap-3">
+                            <span class="px-3 py-1 text-xs font-bold rounded-full bg-alda-dark text-alda-gold">@Model.InquiryType</span>
+                            @if (Model.IsArchived)
+                            {
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-gray-100 text-gray-500 uppercase">Archived</span>
+                            }
+                            else if (Model.IsRead)
+                            {
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-green-100 text-green-700 uppercase">Read</span>
+                            }
+                            else
+                            {
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-blue-100 text-blue-700 uppercase animate-pulse">New Inquiry</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                    <div>
+                        <label class="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2">From</label>
+                        <p class="text-lg font-bold text-alda-dark">@Model.FullName</p>
+                        <p class="text-gray-500">@Model.EmailAddress</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2">Details</label>
+                        <p class="text-gray-600"><span class="font-medium text-alda-dark">Received:</span> @Model.CreatedAt.ToString("MMM dd, yyyy HH:mm")</p>
+                        @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+                        {
+                            <p class="text-gray-600"><span class="font-medium text-alda-dark">Phone:</span> @Model.PhoneNumber</p>
+                        }
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-8 rounded-2xl border border-gray-100 mb-8">
+                    <label class="text-xs font-black text-gray-400 uppercase tracking-widest block mb-4">Message Body</label>
+                    <p class="text-alda-dark leading-relaxed whitespace-pre-wrap text-lg">@Model.Message</p>
+                </div>
+
+                <div class="flex flex-wrap gap-4 pt-4">
+                    @if (!Model.IsArchived)
+                    {
+                        <a href="mailto:@Model.EmailAddress?subject=Re: @Model.Subject" class="btn-primary flex items-center gap-2">
+                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                             Reply via Email
+                        </a>
+                        
+                        @if (!Model.IsRead)
+                        {
+                            <form asp-action="MarkAsRead" asp-route-id="@Model.Id" method="post">
+                                <button type="submit" class="btn-secondary">Mark as Read</button>
+                            </form>
+                        }
+                        
+                        <form asp-action="Archive" asp-route-id="@Model.Id" method="post">
+                            <button type="submit" class="btn-secondary text-red-600 border-red-200 hover:bg-red-50" onclick="return confirm('Archive this inquiry?')">Archive</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="Unarchive" asp-route-id="@Model.Id" method="post">
+                            <button type="submit" class="btn-primary bg-green-600 hover:bg-green-700">Restore from Archive</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div class="card p-6 bg-alda-gold/10 border-alda-gold/30">
+                <h3 class="text-lg font-montserrat font-bold text-alda-dark mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-alda-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    Internal Staff Notes
+                </h3>
+                <p class="text-sm text-gray-500 mb-4">Maintain private records and follow-ups for this inquiry.</p>
+                <form asp-action="UpdateNotes" asp-route-id="@Model.Id" method="post">
+                    @Html.AntiForgeryToken()
+                    <textarea name="adminNotes" rows="12" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-alda-gold mb-4 text-sm" placeholder="Add follow-up notes...">@Model.AdminNotes</textarea>
+                    <button type="submit" class="btn-primary w-full shadow-lg">Save Internal Notes</button>
+                </form>
+            </div>
+            
+            @if (Model.IsRead && Model.ReadDate.HasValue)
+            {
+                <div class="card p-6 bg-white border-gray-100">
+                    <div class="flex items-center gap-3 text-green-600">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div class="text-sm font-bold uppercase tracking-tight">Opened By Admin</div>
+                    </div>
+                    <div class="text-xs text-gray-400 mt-1">@Model.ReadDate.Value.ToString("F")</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

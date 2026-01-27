@@ -1,0 +1,40 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  PortalBase.Core -> C:\Users\stephen.alade\source\repos\Alda\PortalBase.Core\bin\Debug\net8.0\PortalBase.Core.dll
+  PortalBase.Web -> C:\Users\stephen.alade\source\repos\Alda\PortalBase.Web\bin\Debug\net8.0\PortalBase.Web.dll
+  npm error code EUSAGE
+  npm error
+  npm error The `npm ci` command can only install with an existing package-lock.json or
+  npm error npm-shrinkwrap.json with lockfileVersion >= 1. Run an install with npm@5 or
+  npm error later to generate a package-lock.json file, then try again.
+  npm error
+  npm error Clean install a project
+  npm error
+EXEC : npm error Usage:  [C:\Users\stephen.alade\source\repos\Alda\PortalBase.Web\PortalBase.Web.csproj]
+  npm error npm ci
+  npm error
+EXEC : npm error Options:  [C:\Users\stephen.alade\source\repos\Alda\PortalBase.Web\PortalBase.Web.csproj]
+  npm error [--install-strategy <hoisted|nested|shallow|linked>] [--legacy-bundling]
+  npm error [--global-style] [--omit <dev|optional|peer> [--omit <dev|optional|peer> ...]]
+  npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+  npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts] [--no-audit]
+  npm error [--no-bin-links] [--no-fund] [--dry-run]
+  npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+  npm error [-ws|--workspaces] [--include-workspace-root] [--install-links]
+  npm error
+EXEC : npm error aliases: clean-install, ic, install-clean, isntall-clean [C:\Users\stephen.alade\source\repos\Alda\PortalBase.Web\PortalBase.Web.csproj]
+  npm error
+  npm error Run "npm help ci" for more info
+  npm error A complete log of this run can be found in: C:\Users\stephen.alade\AppData\Local\npm-cache\_logs\2026-01-13T14_19_08_508Z-debug-0.log
+C:\Users\stephen.alade\source\repos\Alda\PortalBase.Web\PortalBase.Web.csproj(28,5): error MSB3073: The command "npm ci" exited with code 1.
+
+Build FAILED.
+
+EXEC : npm error Usage:  [C:\Users\stephen.alade\source\repos\Alda\PortalBase.Web\PortalBase.Web.csproj]
+EXEC : npm error Options:  [C:\Users\stephen.alade\source\repos\Alda\PortalBase.Web\PortalBase.Web.csproj]
+EXEC : npm error aliases: clean-install, ic, install-clean, isntall-clean [C:\Users\stephen.alade\source\repos\Alda\PortalBase.Web\PortalBase.Web.csproj]
+C:\Users\stephen.alade\source\repos\Alda\PortalBase.Web\PortalBase.Web.csproj(28,5): error MSB3073: The command "npm ci" exited with code 1.
+    0 Warning(s)
+    4 Error(s)
+
+Time Elapsed 00:00:06.12

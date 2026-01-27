@@ -1,0 +1,223 @@
+@{
+    ViewData["Title"] = "Admin - Settings";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <div class="mb-6 flex justify-between items-center">
+        <h1 class="text-3xl font-montserrat font-bold text-alda-dark">Settings</h1>
+        <div class="space-x-2">
+            <a asp-action="Index" class="btn-secondary">Back to Admin</a>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Settings Navigation -->
+        <div class="lg:col-span-1">
+            <div class="card">
+                <nav class="space-y-2">
+                    <a href="#general" class="block px-4 py-2 rounded-lg bg-alda-gold text-alda-dark font-semibold">General</a>
+                    <a href="#email" class="block px-4 py-2 rounded-lg hover:bg-alda-light text-alda-dark">Email</a>
+                    <a href="#notifications" class="block px-4 py-2 rounded-lg hover:bg-alda-light text-alda-dark">Notifications</a>
+                    <a href="#security" class="block px-4 py-2 rounded-lg hover:bg-alda-light text-alda-dark">Security</a>
+                    <a href="#appearance" class="block px-4 py-2 rounded-lg hover:bg-alda-light text-alda-dark">Appearance</a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Settings Content -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- General Settings -->
+            <div id="general" class="card">
+                <h2 class="text-2xl font-montserrat font-bold text-alda-dark mb-6">General Settings</h2>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-alda-dark mb-2">Site Name</label>
+                        <input type="text" value="AldaTraveled" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-alda-dark mb-2">Site Tagline</label>
+                        <input type="text" value="A Global Travel & Educational Consultancy" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">Contact Email</label>
+                            <input type="email" value="info@aldatraveled.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">Contact Phone</label>
+                            <input type="tel" value="+234 802 641 5152" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-alda-dark mb-2">Address</label>
+                        <textarea rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold">Lagos, Nigeria & United Kingdom</textarea>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">Timezone</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold">
+                                <option>UTC</option>
+                                <option>Africa/Lagos</option>
+                                <option>Europe/London</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">Language</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold">
+                                <option>English</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="maintenance" class="w-4 h-4 text-alda-gold border-gray-300 rounded focus:ring-alda-gold" />
+                        <label for="maintenance" class="ml-2 text-sm text-alda-dark">Enable Maintenance Mode</label>
+                    </div>
+                    <button type="submit" class="btn-primary">Save General Settings</button>
+                </form>
+            </div>
+
+            <!-- Email Settings -->
+            <div id="email" class="card">
+                <h2 class="text-2xl font-montserrat font-bold text-alda-dark mb-6">Email Configuration</h2>
+                <form class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">SMTP Host</label>
+                            <input type="text" placeholder="smtp.example.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">SMTP Port</label>
+                            <input type="number" value="587" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">SMTP Username</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">SMTP Password</label>
+                            <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">From Email</label>
+                            <input type="email" value="info@aldatraveled.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">From Name</label>
+                            <input type="text" value="AldaTraveled" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="emailEnabled" checked class="w-4 h-4 text-alda-gold border-gray-300 rounded focus:ring-alda-gold" />
+                        <label for="emailEnabled" class="ml-2 text-sm text-alda-dark">Enable Email Notifications</label>
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="submit" class="btn-primary">Save Email Settings</button>
+                        <button type="button" class="btn-secondary">Send Test Email</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Notification Settings -->
+            <div id="notifications" class="card">
+                <h2 class="text-2xl font-montserrat font-bold text-alda-dark mb-6">Notification Preferences</h2>
+                <form class="space-y-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="notifyInquiries" checked class="w-4 h-4 text-alda-gold border-gray-300 rounded focus:ring-alda-gold" />
+                            <label for="notifyInquiries" class="ml-2 text-sm text-alda-dark">New Contact Inquiries</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="notifyApplications" checked class="w-4 h-4 text-alda-gold border-gray-300 rounded focus:ring-alda-gold" />
+                            <label for="notifyApplications" class="ml-2 text-sm text-alda-dark">Scholarship Applications</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="notifyDeadlines" checked class="w-4 h-4 text-alda-gold border-gray-300 rounded focus:ring-alda-gold" />
+                            <label for="notifyDeadlines" class="ml-2 text-sm text-alda-dark">Upcoming Deadlines</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="weeklyReports" class="w-4 h-4 text-alda-gold border-gray-300 rounded focus:ring-alda-gold" />
+                            <label for="weeklyReports" class="ml-2 text-sm text-alda-dark">Weekly Reports</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-alda-dark mb-2">Notification Email</label>
+                        <input type="email" value="admin@aldatraveled.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                    </div>
+                    <button type="submit" class="btn-primary">Save Notification Settings</button>
+                </form>
+            </div>
+
+            <!-- Security Settings -->
+            <div id="security" class="card">
+                <h2 class="text-2xl font-montserrat font-bold text-alda-dark mb-6">Security Settings</h2>
+                <form class="space-y-4">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="twoFactor" class="w-4 h-4 text-alda-gold border-gray-300 rounded focus:ring-alda-gold" />
+                        <label for="twoFactor" class="ml-2 text-sm text-alda-dark">Enable Two-Factor Authentication</label>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-alda-dark mb-2">Session Timeout (minutes)</label>
+                        <input type="number" value="30" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-alda-dark mb-2">Max Login Attempts</label>
+                        <input type="number" value="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-alda-dark mb-2">Password Expiry (days)</label>
+                        <input type="number" value="90" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="publicRegistration" class="w-4 h-4 text-alda-gold border-gray-300 rounded focus:ring-alda-gold" />
+                        <label for="publicRegistration" class="ml-2 text-sm text-alda-dark">Allow Public Registration</label>
+                    </div>
+                    <button type="submit" class="btn-primary">Save Security Settings</button>
+                </form>
+            </div>
+
+            <!-- Appearance Settings -->
+            <div id="appearance" class="card">
+                <h2 class="text-2xl font-montserrat font-bold text-alda-dark mb-6">Appearance Settings</h2>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-alda-dark mb-2">Brand Color (Gold)</label>
+                        <input type="color" value="#E1AD01" class="w-full h-12 border border-gray-300 rounded-lg" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-alda-dark mb-2">Brand Color (Dark)</label>
+                        <input type="color" value="#1C1C1C" class="w-full h-12 border border-gray-300 rounded-lg" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-alda-dark mb-2">Items Per Page</label>
+                        <input type="number" value="12" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">Date Format</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold">
+                                <option>MM/DD/YYYY</option>
+                                <option>DD/MM/YYYY</option>
+                                <option>YYYY-MM-DD</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-alda-dark mb-2">Time Format</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold">
+                                <option>12 Hour</option>
+                                <option>24 Hour</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Save Appearance Settings</button>
+                    <button type="button" class="btn-secondary">Reset to Default</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

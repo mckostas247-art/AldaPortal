@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Roboto', system-ui, sans-serif;
+    line-height: 1.6;
+    color: #1C1C1C;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #1C1C1C;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-alda-gold hover:bg-yellow-600 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-alda-gold focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border-2 border-alda-gold text-alda-gold hover:bg-alda-gold hover:text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-alda-gold focus:ring-offset-2;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100;
+  }
+
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl;
+  }
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at top right, #1a2a3a, #0a0e12);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.gold-gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-alda-gold via-yellow-300 to-alda-gold font-bold;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-100 {
+  animation-delay: 0.15s;
+}
+
+.delay-200 {
+  animation-delay: 0.3s;
+}
+
+.delay-300 {
+  animation-delay: 0.45s;
+}
+
+.delay-400 {
+  animation-delay: 0.6s;
+}
+
+.hover-scale {
+  @apply transition-transform duration-500 hover:scale-105;
+}

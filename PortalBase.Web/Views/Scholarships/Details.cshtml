@@ -1,0 +1,102 @@
+@model PortalBase.Core.Entities.Scholarship
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-6">
+                <a asp-controller="Scholarships" asp-action="Index" class="text-alda-gold hover:text-alda-dark transition-colors">← Back to Scholarships</a>
+            </div>
+
+            <div class="card mb-6">
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-alda-gold text-alda-dark text-sm font-semibold rounded">@Model.Country</span>
+                    <span class="px-3 py-1 bg-alda-dark text-white text-sm font-semibold rounded">@Model.FieldOfStudy</span>
+                    <span class="px-3 py-1 bg-gray-200 text-alda-dark text-sm font-semibold rounded">@Model.DegreeLevel</span>
+                </div>
+
+                <h1 class="text-3xl md:text-4xl font-montserrat font-bold text-alda-dark mb-4">@Model.Title</h1>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-sm font-semibold text-alda-gray mb-1">Scholarship Amount</h3>
+                        <p class="text-2xl font-bold text-alda-dark">@Model.Amount.ToString("C0") @Model.Currency</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-alda-gray mb-1">Application Deadline</h3>
+                        <p class="text-xl font-bold text-alda-dark">@Model.Deadline.ToString("MMMM dd, yyyy")</p>
+                        @{
+                            var daysLeft = (Model.Deadline - DateTime.UtcNow).Days;
+                        }
+                        @if (daysLeft > 0)
+                        {
+                            <p class="text-sm text-alda-gray">@daysLeft days remaining</p>
+                        }
+                        else
+                        {
+                            <p class="text-sm text-red-600">Deadline has passed</p>
+                        }
+                    </div>
+                </div>
+
+                <div class="prose max-w-none mb-6">
+                    <h2 class="text-2xl font-montserrat font-bold text-alda-dark mb-3">Description</h2>
+                    <p class="text-alda-gray">@Model.Description</p>
+                </div>
+
+                <div class="prose max-w-none mb-6">
+                    <h2 class="text-2xl font-montserrat font-bold text-alda-dark mb-3">Eligibility Requirements</h2>
+                    <div class="text-alda-gray whitespace-pre-line">@Model.Eligibility</div>
+                </div>
+
+                <div class="prose max-w-none mb-6">
+                    <h2 class="text-2xl font-montserrat font-bold text-alda-dark mb-3">Required Documents</h2>
+                    <div class="text-alda-gray whitespace-pre-line">@Model.RequiredDocuments</div>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(Model.AdditionalInfo))
+                {
+                    <div class="prose max-w-none mb-6">
+                        <h2 class="text-2xl font-montserrat font-bold text-alda-dark mb-3">Additional Information</h2>
+                        <div class="text-alda-gray whitespace-pre-line">@Model.AdditionalInfo</div>
+                    </div>
+                }
+
+                <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                    @if (!string.IsNullOrWhiteSpace(Model.ApplicationUrl))
+                    {
+                        <a href="@Model.ApplicationUrl" target="_blank" rel="noopener noreferrer" class="btn-primary">Apply Now</a>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.OfficialWebsite))
+                    {
+                        <a href="@Model.OfficialWebsite" target="_blank" rel="noopener noreferrer" class="btn-secondary">Official Website</a>
+                    }
+                </div>
+            </div>
+
+            @if (ViewBag.RelatedScholarships != null && ((List<PortalBase.Core.Entities.Scholarship>)ViewBag.RelatedScholarships).Any())
+            {
+                <div class="mt-12">
+                    <h2 class="text-2xl font-montserrat font-bold text-alda-dark mb-6">Related Scholarships</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        @foreach (var scholarship in (List<PortalBase.Core.Entities.Scholarship>)ViewBag.RelatedScholarships)
+                        {
+                            <div class="card">
+                                <h3 class="text-lg font-montserrat font-semibold text-alda-dark mb-2">
+                                    <a asp-controller="Scholarships" asp-action="Details" asp-route-id="@scholarship.Id" class="hover:text-alda-gold transition-colors">@scholarship.Title</a>
+                                </h3>
+                                <p class="text-sm text-alda-gray mb-3">@scholarship.Country • @scholarship.DegreeLevel</p>
+                                <p class="text-alda-dark font-bold mb-3">@scholarship.Amount.ToString("C0") @scholarship.Currency</p>
+                                <a asp-controller="Scholarships" asp-action="Details" asp-route-id="@scholarship.Id" class="text-alda-gold hover:text-alda-dark font-medium">View Details →</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+

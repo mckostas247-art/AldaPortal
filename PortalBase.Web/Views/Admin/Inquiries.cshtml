@@ -1,0 +1,98 @@
+@model IEnumerable<PortalBase.Core.Entities.ContactInquiry>
+@{
+    ViewData["Title"] = "Admin - Contact Inquiries";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <div class="mb-6 flex justify-between items-center">
+        <h1 class="text-3xl font-montserrat font-bold text-alda-dark">Contact Inquiries Management</h1>
+        <div class="space-x-2">
+            <a asp-action="Index" class="btn-secondary">Manage Pages</a>
+            <a asp-action="Scholarships" class="btn-secondary">Manage Scholarships</a>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="card">
+            <div class="text-2xl font-bold text-alda-dark">@Model.Count()</div>
+            <div class="text-alda-gray">Total Inquiries</div>
+        </div>
+        <div class="card">
+            <div class="text-2xl font-bold text-alda-dark">@Model.Count(i => !i.IsRead)</div>
+            <div class="text-alda-gray">Unread</div>
+        </div>
+        <div class="card">
+            <div class="text-2xl font-bold text-alda-dark">@Model.Count(i => i.IsRead && !i.IsArchived)</div>
+            <div class="text-alda-gray">Read</div>
+        </div>
+        <div class="card">
+            <div class="text-2xl font-bold text-alda-dark">@Model.Count(i => i.IsArchived)</div>
+            <div class="text-alda-gray">Archived</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-alda-dark uppercase tracking-wider">Name</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-alda-dark uppercase tracking-wider">Email</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-alda-dark uppercase tracking-wider">Subject</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-alda-dark uppercase tracking-wider">Type</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-alda-dark uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-alda-dark uppercase tracking-wider">Date</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-alda-dark uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach (var item in Model)
+                    {
+                        <tr class="hover:bg-gray-50 @(item.IsRead ? "" : "bg-blue-50")">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-alda-dark">@item.FullName</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-alda-gray">@item.EmailAddress</td>
+                            <td class="px-6 py-4 text-sm text-alda-gray">@item.Subject</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">@item.InquiryType</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                @if (item.IsArchived)
+                                {
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">Archived</span>
+                                }
+                                else if (item.IsRead)
+                                {
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Read</span>
+                                }
+                                else
+                                {
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">New</span>
+                                }
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-alda-gray">@item.CreatedAt.ToString("g")</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                <a asp-action="InquiryDetails" asp-route-id="@item.Id" class="text-alda-gold hover:text-yellow-600">View</a>
+                                @if (!item.IsArchived)
+                                {
+                                    <form asp-action="Archive" asp-route-id="@item.Id" method="post" class="inline">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="text-red-600 hover:text-red-800" onclick="return confirm('Are you sure you want to archive this inquiry?')">Archive</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-action="Unarchive" asp-route-id="@item.Id" method="post" class="inline">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="text-green-600 hover:text-green-800">Unarchive</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

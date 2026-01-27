@@ -1,0 +1,175 @@
+@model PortalBase.Core.Entities.Scholarship
+@{
+    ViewData["Title"] = "Create Scholarship";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-montserrat font-bold text-alda-dark mb-6 text-glow">Create New Scholarship</h1>
+
+    <div class="card p-8">
+        <form asp-action="CreateScholarship" method="post" class="space-y-6">
+            <div asp-validation-summary="ModelOnly" class="text-red-600"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="Title" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                    <input asp-for="Title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-transparent" />
+                    <span asp-validation-for="Title" class="text-red-600 text-sm"></span>
+                </div>
+                
+                <div>
+                    <label asp-for="Country" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                    <input asp-for="Country" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-transparent" />
+                    <span asp-validation-for="Country" class="text-red-600 text-sm"></span>
+                </div>
+                
+                <div>
+                    <label asp-for="FieldOfStudy" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                    <input asp-for="FieldOfStudy" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-transparent" />
+                    <span asp-validation-for="FieldOfStudy" class="text-red-600 text-sm"></span>
+                </div>
+                
+                <div>
+                    <label asp-for="DegreeLevel" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                    <select asp-for="DegreeLevel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-transparent">
+                        <option value="">Select Degree Level</option>
+                        <option value="Bachelor">Bachelor</option>
+                        <option value="Master">Master</option>
+                        <option value="PhD">PhD</option>
+                        <option value="Diploma">Diploma</option>
+                        <option value="Certificate">Certificate</option>
+                    </select>
+                    <span asp-validation-for="DegreeLevel" class="text-red-600 text-sm"></span>
+                </div>
+                
+                <div>
+                    <label asp-for="Amount" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                    <input asp-for="Amount" type="number" step="0.01" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-transparent" />
+                    <span asp-validation-for="Amount" class="text-red-600 text-sm"></span>
+                </div>
+                
+                <div>
+                    <label asp-for="Currency" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                    <select asp-for="Currency" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-transparent">
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                        <option value="NGN">NGN</option>
+                    </select>
+                    <span asp-validation-for="Currency" class="text-red-600 text-sm"></span>
+                </div>
+                
+                <div>
+                    <label asp-for="Deadline" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                    <input asp-for="Deadline" type="datetime-local" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-transparent" />
+                    <span asp-validation-for="Deadline" class="text-red-600 text-sm"></span>
+                </div>
+                
+                <div>
+                    <label asp-for="ApplicationUrl" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                    <input asp-for="ApplicationUrl" type="url" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-transparent" />
+                    <span asp-validation-for="ApplicationUrl" class="text-red-600 text-sm"></span>
+                </div>
+
+                 <div>
+                    <label asp-for="OfficialWebsite" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                    <input asp-for="OfficialWebsite" type="url" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-transparent" />
+                    <span asp-validation-for="OfficialWebsite" class="text-red-600 text-sm"></span>
+                </div>
+            </div>
+            
+            <div>
+                <label asp-for="Description" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                <div id="editor-description" class="mb-2"></div>
+                <textarea asp-for="Description" id="Description" class="hidden"></textarea>
+                <span asp-validation-for="Description" class="text-red-600 text-sm"></span>
+            </div>
+            
+            <div>
+                <label asp-for="Eligibility" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                <div id="editor-eligibility" class="mb-2"></div>
+                <textarea asp-for="Eligibility" id="Eligibility" class="hidden"></textarea>
+                <span asp-validation-for="Eligibility" class="text-red-600 text-sm"></span>
+            </div>
+
+            <div>
+                <label asp-for="RequiredDocuments" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                <div id="editor-documents" class="mb-2"></div>
+                <textarea asp-for="RequiredDocuments" id="RequiredDocuments" class="hidden"></textarea>
+                <span asp-validation-for="RequiredDocuments" class="text-red-600 text-sm"></span>
+            </div>
+
+            <div>
+                <label asp-for="AdditionalInfo" class="block text-sm font-medium text-alda-dark mb-2"></label>
+                <textarea asp-for="AdditionalInfo" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-transparent"></textarea>
+                <span asp-validation-for="AdditionalInfo" class="text-red-600 text-sm"></span>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="flex items-center">
+                    <input asp-for="IsActive" type="checkbox" checked class="h-4 w-4 text-alda-gold focus:ring-alda-gold border-gray-300 rounded" />
+                    <label asp-for="IsActive" class="ml-2 block text-sm text-alda-dark">Active</label>
+                </div>
+                <div class="flex items-center">
+                    <input asp-for="IsFeatured" type="checkbox" class="h-4 w-4 text-alda-gold focus:ring-alda-gold border-gray-300 rounded" />
+                    <label asp-for="IsFeatured" class="ml-2 block text-sm text-alda-dark">Featured</label>
+                </div>
+            </div>
+            
+            <div class="flex space-x-4 pt-6">
+                <button type="submit" class="btn-primary">Create Scholarship</button>
+                <a asp-action="Scholarships" class="btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function setupEditor(editorId, textareaId) {
+                var container = document.getElementById(editorId);
+                var textarea = document.getElementById(textareaId);
+                
+                var quill = new Quill(container, {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            ['bold', 'italic', 'underline'],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            ['link', 'clean']
+                        ]
+                    }
+                });
+
+                return { quill: quill, textarea: textarea };
+            }
+
+            var editors = [
+                setupEditor('editor-description', 'Description'),
+                setupEditor('editor-eligibility', 'Eligibility'),
+                setupEditor('editor-documents', 'RequiredDocuments')
+            ];
+
+            var form = document.querySelector('form');
+            form.onsubmit = function() {
+                editors.forEach(function(item) {
+                    item.textarea.value = item.quill.root.innerHTML;
+                });
+            };
+        });
+    </script>
+    <style>
+        .ql-container {
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            background: white;
+            min-height: 200px;
+        }
+        .ql-toolbar {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            background: #f8fafc;
+        }
+    </style>
+}

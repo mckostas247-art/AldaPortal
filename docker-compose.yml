@@ -1,0 +1,61 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: portalbase-mysql
+    hostname: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-PortalBase123!}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-PortalBase}
+      MYSQL_USER: ${MYSQL_USER:-portalbase}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-PortalBase123!}
+      TZ: UTC
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - portalbase-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  web:
+    build:
+      context: .
+      dockerfile: PortalBase.Web/Dockerfile
+    container_name: portalbase-web
+    hostname: portalbase-web
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Production}
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=mysql;Database=${MYSQL_DATABASE:-PortalBase};User=${MYSQL_USER:-portalbase};Password=${MYSQL_PASSWORD:-PortalBase123!};Port=3306;
+    ports:
+      - "${WEB_PORT:-8082}:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - portalbase-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  mysql_data:
+    name: portalbase_mysql_data
+    driver: local
+
+networks:
+  portalbase-network:
+    name: portalbase-network
+    driver: bridge
+

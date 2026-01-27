@@ -1,0 +1,17 @@
+bin/
+obj/
+.git/
+node_modules/
+*.pfx
+Logs/
+.vs/
+.vscode/
+wwwroot/css/input.css
+*.user
+*.suo
+*.cache
+.DS_Store
+
+
+
+

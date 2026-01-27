@@ -1,0 +1,122 @@
+@model PortalBase.Core.Entities.ContactInquiry
+@{
+    ViewData["Title"] = "Contact Us - AldaTraveled";
+}
+
+<!-- Hero Section -->
+<section class="hero-gradient text-white py-20 md:py-32">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-montserrat font-bold mb-6">
+                Get In <span class="text-alda-gold">Touch</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8">
+                Have questions? We're here to help you on your educational journey.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Contact Information -->
+                <div>
+                    <h2 class="text-3xl font-montserrat font-bold text-alda-dark mb-6">Contact Information</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-montserrat font-semibold text-alda-dark mb-2">Lagos Office</h3>
+                            <p class="text-alda-gray">Lagos, Nigeria</p>
+                        </div>
+                        <div>
+                            <h3 class="font-montserrat font-semibold text-alda-dark mb-2">UK Office</h3>
+                            <p class="text-alda-gray">United Kingdom</p>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 mr-3 text-alda-gold mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <div>
+                                <a href="tel:+2348026415152" class="text-alda-dark hover:text-alda-gold transition-colors block">+234 802 641 5152</a>
+                                <a href="tel:+447858958794" class="text-alda-dark hover:text-alda-gold transition-colors block">+44 7858 958794</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 mr-3 text-alda-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <a href="mailto:info@aldatraveled.com" class="text-alda-dark hover:text-alda-gold transition-colors">info@aldatraveled.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div>
+                    <h2 class="text-3xl font-montserrat font-bold text-alda-dark mb-6">Send Us a Message</h2>
+                    
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
+
+                    <form asp-action="Submit" method="post" class="card">
+                        <div asp-validation-summary="ModelOnly" class="text-red-600 mb-4"></div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="FullName" class="block text-sm font-medium text-alda-dark mb-2">Full Name *</label>
+                            <input asp-for="FullName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                            <span asp-validation-for="FullName" class="text-red-600 text-sm"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="EmailAddress" class="block text-sm font-medium text-alda-dark mb-2">Email Address *</label>
+                            <input asp-for="EmailAddress" type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                            <span asp-validation-for="EmailAddress" class="text-red-600 text-sm"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="PhoneNumber" class="block text-sm font-medium text-alda-dark mb-2">Phone Number</label>
+                            <input asp-for="PhoneNumber" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                            <span asp-validation-for="PhoneNumber" class="text-red-600 text-sm"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="InquiryType" class="block text-sm font-medium text-alda-dark mb-2">Inquiry Type</label>
+                            <select asp-for="InquiryType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold">
+                                <option value="General">General Inquiry</option>
+                                <option value="Scholarship">Scholarship</option>
+                                <option value="Travel">Travel</option>
+                                <option value="Education">Education</option>
+                            </select>
+                            <span asp-validation-for="InquiryType" class="text-red-600 text-sm"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Subject" class="block text-sm font-medium text-alda-dark mb-2">Subject *</label>
+                            <input asp-for="Subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold" />
+                            <span asp-validation-for="Subject" class="text-red-600 text-sm"></span>
+                        </div>
+
+                        <div class="mb-6">
+                            <label asp-for="Message" class="block text-sm font-medium text-alda-dark mb-2">Message *</label>
+                            <textarea asp-for="Message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-alda-gold focus:border-alda-gold"></textarea>
+                            <span asp-validation-for="Message" class="text-red-600 text-sm"></span>
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
