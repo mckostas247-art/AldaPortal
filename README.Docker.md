@@ -15,6 +15,18 @@ This guide explains how to deploy PortalBase using Docker Compose.
    ```
    Edit `.env` to customize settings.
 
+## Automated Deployment (CI/CD)
+
+The project includes a GitHub Actions workflow in `.github/workflows/deploy.yml`. To enable automatic deployments to your Digital Ocean server on every `git push`:
+
+1. Go to your GitHub Repository **Settings** > **Secrets and variables** > **Actions**.
+2. Add the following **Repository secrets**:
+   - `SSH_HOST`: Your server's IP address.
+   - `SSH_USER`: The username (usually `root`).
+   - `SSH_PRIVATE_KEY`: Your private SSH key (the content of `~/.ssh/id_rsa`).
+
+Once configured, any push to the `main` branch will automatically update the site.
+
 2. **Build and start services**:
    ```bash
    docker-compose up -d

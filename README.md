@@ -107,6 +107,14 @@ docker run -p 8080:8080 -e ConnectionStrings__DefaultConnection="your-connection
 - **Responsive Design**: Mobile-friendly with Tailwind CSS
 - **Memory Optimized**: Configured for low RAM deployment (4GB server)
 
+### Quick Server Update
+
+If you are on the server and want to update the site with one command:
+
+1. Ensure `deploy.sh` is on the server (it's in the root of the repo).
+2. Run this once to make it executable: `chmod +x deploy.sh`
+3. Every time you want to update: `./deploy.sh`
+
 ### Technology Stack
 
 - ASP.NET Core 8.0 MVC
