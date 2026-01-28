@@ -21,10 +21,8 @@
     <div class="container mx-auto px-4 relative z-10">
         <div class="max-w-5xl mx-auto text-center">
             <!-- Brand Icon -->
-            <div class="w-24 h-24 bg-alda-gold mx-auto mb-10 rounded-3xl flex items-center justify-center shadow-2xl animate-float group">
-                 <svg viewBox="0 0 100 100" class="w-16 h-16 fill-alda-dark group-hover:scale-110 transition-transform">
-                    <path d="M50 15 L85 85 L65 85 L50 55 L35 85 L15 85 Z" />
-                </svg>
+            <div class="w-32 h-32 bg-white/10 backdrop-blur-md mx-auto mb-10 rounded-3xl flex items-center justify-center shadow-2xl animate-float group overflow-hidden border border-white/20">
+                 <img src="~/images/logo.jpg" alt="ALDA TRAVELED Logo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" asp-append-version="true" />
             </div>
 
             <!-- Breadcrumb-style motto -->
@@ -44,13 +42,13 @@
 
             <div class="max-w-2xl mx-auto bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl mb-12 animate-fade-in delay-300">
                 <p class="text-lg text-gray-400 leading-relaxed">
-                    Explore international scholarship opportunities and comprehensive educational travel services designed to make your academic dreams a reality.
+                    Explore international educational opportunities and comprehensive travel services designed to make your academic dreams a reality.
                 </p>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in delay-400">
                 <a asp-controller="Scholarships" asp-action="Index" class="btn-primary px-12 py-5 text-xl shadow-[0_0_30px_rgba(255,215,0,0.3)] hover:shadow-gold transition-all">
-                    Browse Scholarships
+                    Browse Programs
                 </a>
                 <a asp-controller="Contact" asp-action="Index" class="btn-secondary px-12 py-5 text-xl bg-white/5 backdrop-blur-md">
                     Get Started Now
@@ -159,9 +157,9 @@
         <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div class="md:w-2/3">
                 <span class="text-alda-gold font-bold uppercase tracking-widest mb-4 block">Funding Your Future</span>
-                <h2 class="text-3xl md:text-5xl font-montserrat font-bold text-alda-dark leading-tight">Featured Scholarships</h2>
+                <h2 class="text-3xl md:text-5xl font-montserrat font-bold text-alda-dark leading-tight">Featured Programs & Schools</h2>
             </div>
-            <a asp-controller="Scholarships" asp-action="Index" class="btn-secondary whitespace-nowrap">View All Scholarships</a>
+            <a asp-controller="Scholarships" asp-action="Index" class="btn-secondary whitespace-nowrap">View All Programs</a>
         </div>
         
         @if (ViewBag.FeaturedScholarships != null && ((List<PortalBase.Core.Entities.Scholarship>)ViewBag.FeaturedScholarships).Any())
@@ -195,7 +193,7 @@
                             </div>
                         </div>
                         <a asp-controller="Scholarships" asp-action="Details" asp-route-id="@scholarship.Id" class="bg-alda-dark text-white py-4 text-center group-hover:bg-alda-gold group-hover:text-alda-dark transition-all font-bold">
-                            View Full Scholarship Details
+                            View Program Details
                         </a>
                     </div>
                 }
@@ -212,7 +210,7 @@
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
             <div class="group">
                 <div class="text-5xl md:text-6xl font-montserrat font-bold text-alda-gold mb-3 group-hover:scale-110 transition-transform">500+</div>
-                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Global Scholarships</div>
+                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Educational Programs</div>
             </div>
             <div class="group">
                 <div class="text-5xl md:text-6xl font-montserrat font-bold text-alda-gold mb-3 group-hover:scale-110 transition-transform">50+</div>

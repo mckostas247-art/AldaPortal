@@ -73,26 +73,28 @@ public class ScholarshipsController : Controller
         ViewBag.TotalCount = totalCount;
 
         // Get filter options
-        ViewBag.Countries = await _context.Scholarships
-            .Where(s => s.IsActive)
-            .Select(s => s.Country)
-            .Distinct()
-            .OrderBy(c => c)
-            .ToListAsync();
+        ViewBag.Countries = new List<string> { "UNITED KINGDOM", "IRELAND", "GERMANY", "AUSTRALIA", "USA", "CANADA" };
 
-        ViewBag.FieldsOfStudy = await _context.Scholarships
-            .Where(s => s.IsActive)
-            .Select(s => s.FieldOfStudy)
-            .Distinct()
-            .OrderBy(f => f)
-            .ToListAsync();
+        ViewBag.FieldsOfStudy = new List<string> 
+        { 
+            "ARTS", 
+            "BUSINESS, MANAGEMENT AND ECONOMICS", 
+            "ENGINEERING AND TECHNOLOGY", 
+            "HEALTH SCIENCES, MEDICINE, NURSING, PARAMEDIC AND KINESIOLOGY", 
+            "LAW, POLITICS, SOCIAL, and SCIENCES" 
+        };
 
-        ViewBag.DegreeLevels = await _context.Scholarships
-            .Where(s => s.IsActive)
-            .Select(s => s.DegreeLevel)
-            .Distinct()
-            .OrderBy(d => d)
-            .ToListAsync();
+        ViewBag.DegreeLevels = new List<string> 
+        { 
+            "4-YEAR BACHELOR'S DEGREE", 
+            "TOP-UP DEGREE", 
+            "2-YEAR UNDERGRADUATE DIPLOMA", 
+            "INTEGRATED MASTERS",
+            "MASTER'S DEGREE", 
+            "DOCTORAL/PHD", 
+            "POSTGRADUATE DIPLOMA", 
+            "POSTGRADUATE CERTIFICATE" 
+        };
 
         return View(scholarships);
     }
