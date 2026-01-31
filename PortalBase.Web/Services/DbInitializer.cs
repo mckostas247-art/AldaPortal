@@ -116,70 +116,70 @@ public class DbInitializer : IDbInitializer
             });
         }
 
-        // Create Privacy Policy page
-        if (!await _context.Pages.AnyAsync(p => p.Slug == "privacy-policy"))
+        // Update or Create Privacy Policy page
+        var privacyPage = await _context.Pages.FirstOrDefaultAsync(p => p.Slug == "privacy-policy");
+        var privacyContent = @"
+            <div class='prose max-w-none text-gray-600'>
+                <h2 class='text-2xl font-bold text-alda-dark mb-4'>1. Introduction</h2>
+                <p class='mb-6'>At ALDA TRAVELED LIMITED, we respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
+
+                <h2 class='text-2xl font-bold text-alda-dark mb-4'>2. The Data We Collect</h2>
+                <p class='mb-4'>We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:</p>
+                <ul class='list-disc pl-6 mb-6 space-y-2'>
+                    <li><strong>Identity Data:</strong> includes first name, last name, username or similar identifier.</li>
+                    <li><strong>Contact Data:</strong> includes email address and telephone numbers.</li>
+                    <li><strong>Academic Data:</strong> includes educational history, transcripts, and qualifications for scholarship and admission purposes.</li>
+                    <li><strong>Technical Data:</strong> includes internet protocol (IP) address, browser type and version, and location.</li>
+                </ul>
+
+                <h2 class='text-2xl font-bold text-alda-dark mb-4'>3. How We Use Your Data</h2>
+                <p class='mb-6'>We will only use your personal data when the law allows us to. Most commonly, we will use your personal data to provide consultancy services, process visa support inquiries, and facilitate university admissions.</p>
+
+                <h2 class='text-2xl font-bold text-alda-dark mb-4'>4. Data Security</h2>
+                <p class='mb-6'>We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorised way, altered or disclosed.</p>
+
+                <h2 class='text-2xl font-bold text-alda-dark mb-4'>5. Contact Us</h2>
+                <p class='mb-6'>If you have any questions about this privacy policy or our privacy practices, please contact us at <a href='mailto:info@aldatraveled.com' class='text-alda-gold font-bold transition-colors'>info@aldatraveled.com</a>.</p>
+            </div>";
+
+        if (privacyPage == null)
         {
-            _context.Pages.Add(new Page
-            {
-                Slug = "privacy-policy",
-                Title = "Privacy Policy",
-                ContentHtml = @"
-                    <div class='prose max-w-none text-gray-600'>
-                        <h2 class='text-2xl font-bold text-alda-dark mb-4'>1. Introduction</h2>
-                        <p class='mb-6'>At ALDA TRAVELED LIMITED, we respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
-
-                        <h2 class='text-2xl font-bold text-alda-dark mb-4'>2. The Data We Collect</h2>
-                        <p class='mb-4'>We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:</p>
-                        <ul class='list-disc pl-6 mb-6 space-y-2'>
-                            <li><strong>Identity Data:</strong> includes first name, last name, username or similar identifier.</li>
-                            <li><strong>Contact Data:</strong> includes email address and telephone numbers.</li>
-                            <li><strong>Academic Data:</strong> includes educational history, transcripts, and qualifications for scholarship and admission purposes.</li>
-                            <li><strong>Technical Data:</strong> includes internet protocol (IP) address, browser type and version, and location.</li>
-                        </ul>
-
-                        <h2 class='text-2xl font-bold text-alda-dark mb-4'>3. How We Use Your Data</h2>
-                        <p class='mb-6'>We will only use your personal data when the law allows us to. Most commonly, we will use your personal data to provide consultancy services, process visa support inquiries, and facilitate university admissions.</p>
-
-                        <h2 class='text-2xl font-bold text-alda-dark mb-4'>4. Data Security</h2>
-                        <p class='mb-6'>We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorised way, altered or disclosed.</p>
-
-                        <h2 class='text-2xl font-bold text-alda-dark mb-4'>5. Contact Us</h2>
-                        <p class='mb-6'>If you have any questions about this privacy policy or our privacy practices, please contact us at <a href='mailto:info@aldatraveled.com' class='text-alda-gold font-bold transition-colors'>info@aldatraveled.com</a>.</p>
-                    </div>",
-                IsPublished = true,
-                CreatedAt = DateTime.UtcNow,
-                LastUpdated = DateTime.UtcNow
-            });
+            _context.Pages.Add(new Page { Slug = "privacy-policy", Title = "Privacy Policy", ContentHtml = privacyContent, IsPublished = true, CreatedAt = DateTime.UtcNow, LastUpdated = DateTime.UtcNow });
+        }
+        else
+        {
+            privacyPage.ContentHtml = privacyContent;
+            privacyPage.LastUpdated = DateTime.UtcNow;
         }
 
-        // Create Terms of Service page
-        if (!await _context.Pages.AnyAsync(p => p.Slug == "terms-of-service"))
+        // Update or Create Terms of Service page
+        var termsPage = await _context.Pages.FirstOrDefaultAsync(p => p.Slug == "terms-of-service");
+        var termsContent = @"
+            <div class='prose max-w-none text-gray-600'>
+                <h2 class='text-2xl font-bold text-alda-dark mb-4'>1. Terms of Use</h2>
+                <p class='mb-6'>By accessing this website, you are agreeing to be bound by these website Terms of Service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.</p>
+
+                <h2 class='text-2xl font-bold text-alda-dark mb-4'>2. Use License</h2>
+                <p class='mb-6'>Permission is granted to temporarily view the materials on ALDA TRAVELED LIMITED's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title.</p>
+
+                <h2 class='text-2xl font-bold text-alda-dark mb-4'>3. Disclaimer of Services</h2>
+                <p class='mb-6'>The information provided by ALDA TRAVELED LIMITED is for general consultancy purposes. While we strive for accuracy in admissions and visa guidance, we do not guarantee the outcome of any application, as final decisions rest with the respective institutions and government authorities.</p>
+
+                <h2 class='text-2xl font-bold text-alda-dark mb-4'>4. Limitations</h2>
+                <p class='mb-6'>In no event shall ALDA TRAVELED LIMITED or its suppliers be liable for any damages arising out of the use or inability to use the materials on our website.</p>
+
+                <h2 class='text-2xl font-bold text-alda-dark mb-4'>5. Governing Law</h2>
+                <p class='mb-6'>These terms and conditions are governed by and construed in accordance with the laws of Nigeria and the United Kingdom, and you irrevocably submit to the exclusive jurisdiction of the courts in those locations.</p>
+            </div>";
+
+        if (termsPage == null)
         {
-            _context.Pages.Add(new Page
-            {
-                Slug = "terms-of-service",
-                Title = "Terms of Service",
-                ContentHtml = @"
-                    <div class='prose max-w-none text-gray-600'>
-                        <h2 class='text-2xl font-bold text-alda-dark mb-4'>1. Terms of Use</h2>
-                        <p class='mb-6'>By accessing this website, you are agreeing to be bound by these website Terms of Service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.</p>
-
-                        <h2 class='text-2xl font-bold text-alda-dark mb-4'>2. Use License</h2>
-                        <p class='mb-6'>Permission is granted to temporarily view the materials on ALDA TRAVELED LIMITED's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title.</p>
-
-                        <h2 class='text-2xl font-bold text-alda-dark mb-4'>3. Disclaimer of Services</h2>
-                        <p class='mb-6'>The information provided by ALDA TRAVELED LIMITED is for general consultancy purposes. While we strive for accuracy in admissions and visa guidance, we do not guarantee the outcome of any application, as final decisions rest with the respective institutions and government authorities.</p>
-
-                        <h2 class='text-2xl font-bold text-alda-dark mb-4'>4. Limitations</h2>
-                        <p class='mb-6'>In no event shall ALDA TRAVELED LIMITED or its suppliers be liable for any damages arising out of the use or inability to use the materials on our website.</p>
-
-                        <h2 class='text-2xl font-bold text-alda-dark mb-4'>5. Governing Law</h2>
-                        <p class='mb-6'>These terms and conditions are governed by and construed in accordance with the laws of Nigeria and the United Kingdom, and you irrevocably submit to the exclusive jurisdiction of the courts in those locations.</p>
-                    </div>",
-                IsPublished = true,
-                CreatedAt = DateTime.UtcNow,
-                LastUpdated = DateTime.UtcNow
-            });
+            _context.Pages.Add(new Page { Slug = "terms-of-service", Title = "Terms of Service", ContentHtml = termsContent, IsPublished = true, CreatedAt = DateTime.UtcNow, LastUpdated = DateTime.UtcNow });
+        }
+        else
+        {
+            termsPage.ContentHtml = termsContent;
+            termsPage.LastUpdated = DateTime.UtcNow;
         }
 
         await _context.SaveChangesAsync();
