@@ -4,17 +4,29 @@
     ViewData["SeoDescription"] = Model.SeoDescription;
 }
 
-@if (!string.IsNullOrEmpty(Model.HeroImageUrl))
-{
-    <div class="mb-8">
-        <img src="@Model.HeroImageUrl" alt="@Model.Title" class="w-full h-64 md:h-96 object-cover rounded-xl shadow-lg" />
+<!-- Hero Section -->
+<section class="hero-gradient text-white py-16 md:py-24">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-montserrat font-bold mb-4 animate-fade-in">
+                @Model.Title
+            </h1>
+            <div class="w-24 h-1 bg-alda-gold mx-auto opacity-80"></div>
+        </div>
     </div>
-}
+</section>
 
-<div class="container mx-auto px-4 py-8">
-    <div class="max-w-4xl mx-auto">
-        <h1 class="text-4xl font-montserrat font-bold text-alda-dark mb-6">@Model.Title</h1>
-        <div class="prose max-w-none text-alda-gray">
+<!-- Content Section -->
+<div class="container mx-auto px-4 py-20">
+    <div class="max-w-4xl mx-auto bg-white p-8 md:p-16 rounded-3xl shadow-xl border border-gray-100">
+        @if (!string.IsNullOrEmpty(Model.HeroImageUrl))
+        {
+            <div class="mb-12">
+                <img src="@Model.HeroImageUrl" alt="@Model.Title" class="w-full h-64 md:h-96 object-cover rounded-2xl shadow-lg border-2 border-alda-gold/10" />
+            </div>
+        }
+        
+        <div class="prose prose-lg max-w-none prose-headings:font-montserrat prose-headings:text-alda-dark prose-p:text-gray-600 prose-a:text-alda-gold prose-strong:text-alda-dark">
             @Html.Raw(Model.ContentHtml)
         </div>
     </div>
