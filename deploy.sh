@@ -12,19 +12,22 @@ cd ~/alda || { echo "❌ Directory ~/alda not found!"; exit 1; }
 echo "📥 Pulling latest changes from Git..."
 git pull origin main
 
-# 3. Stop and Remove old manual containers (silencing errors if they don't exist)
+# 3. Stop and Remove old containers
 echo "🧹 Cleaning up old containers..."
-docker stop alda-app alda-db 2>/dev/null
-docker rm alda-app alda-db 2>/dev/null
-
-# 4. Spin up the new environment using Docker Compose
-echo "🏗️  Rebuilding and Starting services..."
-# Using 'docker compose' (V2) or 'docker-compose' (V1)
 if command -v docker-compose &> /dev/null
 then
-    docker-compose up -d --build
+    docker-compose down
 else
-    docker compose up -d --build
+    docker compose down
+fi
+
+# 4. Spin up the new environment using Docker Compose
+echo "🏗️  Rebuilding and Starting services (Force Recreate)..."
+if command -v docker-compose &> /dev/null
+then
+    docker-compose up -d --build --force-recreate
+else
+    docker compose up -d --build --force-recreate
 fi
 
 echo "✅ Update Complete! Your site is now running the latest code."

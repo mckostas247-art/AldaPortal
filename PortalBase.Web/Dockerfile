@@ -9,26 +9,29 @@ RUN apt-get update && apt-get install -y nodejs npm
 COPY ["PortalBase.Web/package.json", "PortalBase.Web/postcss.config.js", "PortalBase.Web/tailwind.config.js", "PortalBase.Web/"]
 # Copy CSS input file needed for Tailwind build
 COPY ["PortalBase.Web/wwwroot/css/input.css", "PortalBase.Web/wwwroot/css/"]
-WORKDIR /src/PortalBase.Web
-
-# Install npm dependencies and build CSS
-# npm install works with or without package-lock.json
-RUN npm install && npm run build:css
-
 # Copy solution and project files
 WORKDIR /src
 COPY ["PortalBase.Core/PortalBase.Core.csproj", "PortalBase.Core/"]
 COPY ["PortalBase.Web/PortalBase.Web.csproj", "PortalBase.Web/"]
 COPY ["PortalBase.sln", "./"]
 
-# Restore dependencies
+# Restore .NET dependencies
 RUN dotnet restore "PortalBase.sln"
 
+# Copy package files for NPM install (caching layer)
+COPY ["PortalBase.Web/package.json", "PortalBase.Web/"]
+WORKDIR /src/PortalBase.Web
+RUN npm install
+
 # Copy all source files
+WORKDIR /src
 COPY . .
 
-# Build and publish
+# Build CSS now that all source files are present (Tailwind scans Views)
 WORKDIR /src/PortalBase.Web
+RUN npm run build:css
+
+# Build and publish
 RUN dotnet build "PortalBase.Web.csproj" -c Release -o /app/build
 RUN dotnet publish "PortalBase.Web.csproj" -c Release -o /app/publish /p:UseAppHost=false
 

@@ -17,4 +17,4 @@ jobs:
           script: |
             cd ~/alda
             git pull origin main
-            docker compose up -d --build web
+            docker compose up -d --build --force-recreate web
