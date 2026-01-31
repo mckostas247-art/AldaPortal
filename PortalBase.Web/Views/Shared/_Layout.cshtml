@@ -28,7 +28,7 @@
                     <a class="text-alda-dark hover:text-alda-gold transition-colors font-medium" asp-controller="Home" asp-action="Index">Home</a>
                     <a class="text-alda-dark hover:text-alda-gold transition-colors font-medium" asp-controller="About" asp-action="Index">About Us</a>
                     <a class="text-alda-dark hover:text-alda-gold transition-colors font-medium" asp-controller="Services" asp-action="Index">Services</a>
-                    <a class="text-alda-dark hover:text-alda-gold transition-colors font-medium" asp-controller="Scholarships" asp-action="Index">PROGRAMS & SCHOOLS</a>
+                    <a class="text-alda-dark hover:text-alda-gold transition-colors font-medium" asp-controller="Scholarships" asp-action="Index">Programs & Schools</a>
                     <a class="text-alda-dark hover:text-alda-gold transition-colors font-medium" asp-controller="Contact" asp-action="Index">Contact</a>
                     @if (User.Identity?.IsAuthenticated == true)
                     {
@@ -41,7 +41,7 @@
                     }
                     else
                     {
-                        <a class="text-alda-dark hover:text-alda-gold transition-colors font-medium" asp-controller="Account" asp-action="Login">ACCOUNT</a>
+                        <a class="text-alda-dark hover:text-alda-gold transition-colors font-medium" asp-controller="Account" asp-action="Login">Account</a>
                     }
                 </div>
                 <!-- Mobile menu button -->
@@ -122,7 +122,7 @@
                         <li><a asp-controller="Home" asp-action="Index" class="text-gray-300 hover:text-alda-gold transition-colors">Home</a></li>
                         <li><a asp-controller="About" asp-action="Index" class="text-gray-300 hover:text-alda-gold transition-colors">About Us</a></li>
                         <li><a asp-controller="Services" asp-action="Index" class="text-gray-300 hover:text-alda-gold transition-colors">Services</a></li>
-                        <li><a asp-controller="Scholarships" asp-action="Index" class="text-gray-300 hover:text-alda-gold transition-colors">PROGRAMS & SCHOOLS</a></li>
+                        <li><a asp-controller="Scholarships" asp-action="Index" class="text-gray-300 hover:text-alda-gold transition-colors">Programs & Schools</a></li>
                         <li><a asp-controller="Contact" asp-action="Index" class="text-gray-300 hover:text-alda-gold transition-colors">Contact Us</a></li>
                     </ul>
                 </div>
